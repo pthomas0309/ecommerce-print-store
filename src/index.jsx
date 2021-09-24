@@ -4,10 +4,38 @@ import './index.css';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 
+import { Provider } from 'react-redux';
+import logger from 'redux-logger';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+
+const cart = (state = { cartItems: [], totalPrice: 0  }, action) => {
+
+  // switch statement manipulates state based
+  // on action.type value
+  switch (action.type) {
+    case 'ADD_TO_CART':
+      return {
+        cartItems: [...state.cartItems, action.payload],
+        totalPrice: state.totalPrice + action.payload.price
+      };
+  
+    // executes if no action type is defined
+    default:
+      return state;
+  }
+}
+
+const reduxStore = createStore(
+  combineReducers({
+    cart
+  }),
+  applyMiddleware(logger)
+)
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={reduxStore}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
