@@ -1,9 +1,18 @@
+/* REACT IMPORTS */
 import { useState } from 'react';
 
+/* REDUX IMPORTS */
 import { useDispatch } from 'react-redux';
+
+/* REACT-ROUTER IMPORTS */
+import { useHistory } from 'react-router';
 
 
 export default function LandingPage() {
+
+    // React-Router navigation functionality
+    // uses this history method
+    const history = useHistory();
 
     // local state variable bound to text input
     const [email, setEmail] = useState({
@@ -29,6 +38,7 @@ export default function LandingPage() {
     /* validate email is called after the submit
     is triggered in the form*/
     const validateEmail = e => {
+
         // stop page load
         e.preventDefault();
 
@@ -43,7 +53,7 @@ export default function LandingPage() {
 
             // variable is blank
             // alert the user
-            alert('Could complete action, Email Address field is empty')
+            alert('Could not complete action, Email Address field is empty')
         }
     }
 
@@ -69,6 +79,8 @@ export default function LandingPage() {
         <div>
             <h1>Welcome to the design store</h1>
 
+            <p>Sign up for our newsletter for updates on new products</p>
+
             <form onSubmit={(e) => validateEmail(e)}>
 
                 <label htmlFor="email">
@@ -79,6 +91,7 @@ export default function LandingPage() {
 
             </form>
 
+            <button onClick={ () => history.push('/home')} >Down the Rabbit Hole</button>
 
         </div>
     )

@@ -4,10 +4,15 @@ import './index.css';
 import App from './components/App/App';
 import reportWebVitals from './reportWebVitals';
 
+// redux imports
 import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 
+// this reducer contains the state of the user cart
+// the items in the cart are contained in the array
+// and totalPrice contains the price of each item in the
+// cart combined
 const cart = (state = { cartItems: [], totalPrice: 0  }, action) => {
 
   // switch statement manipulates state based
