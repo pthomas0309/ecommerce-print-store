@@ -10,19 +10,18 @@ import { useHistory } from 'react-router';
 
 export default function LandingPage() {
 
-    // React-Router navigation functionality
-    // uses this history method
     const history = useHistory();
 
-    // local state variable bound to text input
     const [email, setEmail] = useState({
-        emailAddress: ''
+        emailAddress: '',
+        isSubmitted: false
     });
 
     // enables data forwarding to Redux modules
     const dispatch = useDispatch();
 
     const updateEmail = e => {
+
         // stop page load
         e.preventDefault();
 
@@ -42,18 +41,16 @@ export default function LandingPage() {
         // stop page load
         e.preventDefault();
 
-        // conditional checks if email variable is not blank
         if (email.emailAddress !== '') {
             
-            // variable is not blank
             // call function to post email to DB
             saveEmail();
 
         } else {
 
-            // variable is blank
-            // alert the user
-            alert('Could not complete action, Email Address field is empty')
+            // alert the user that the input value
+            // is blank
+            alert('Could not complete action, email address field is empty')
         }
     }
 
@@ -63,14 +60,26 @@ export default function LandingPage() {
     const saveEmail = () => {
         console.log('saving email');
 
-        // dispatch value of local state to
-        // user data saga
+        // dispatch value of email to
+        // user data saga as well as a
+        // function to run if a positive 
+        // status code returns from the server
         dispatch({
-            type: 'SAVE_USER_EMAIL',
-            payload: email
+            type: 'SAVE_EMAIL',
+            payload: email.emailAddress,
+            submissionSuccess: submissionSuccess()
         })
 
-        console.log('email saved');
+    }
+
+    /* submissionSuccess function will update email.isSubmitted
+    bool to true, which updates the way the view is rendered */
+    const submissionSuccess = () => {
+
+        setEmail({
+            ...email,
+            isSubmitted: true
+        });
     }
     
     console.log(email);
@@ -91,7 +100,7 @@ export default function LandingPage() {
 
             </form>
 
-            <button onClick={ () => history.push('/home')} >Down the Rabbit Hole</button>
+            <button onClick={ () => history.push('/storefront') } >Down the Rabbit Hole</button>
 
         </div>
     )

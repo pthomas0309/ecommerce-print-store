@@ -16,7 +16,7 @@ export default function App() {
           <LandingPage />
         </Route>
 
-        <Route path="storefront">
+        <Route path="/storefront">
           <ProductList />
         </Route>
       </div>
