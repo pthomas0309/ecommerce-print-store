@@ -73,11 +73,12 @@ export default function LandingPage() {
     }
 
     /* submissionSuccess function will update email.isSubmitted
-    bool to true, which updates the way the view is rendered */
+    bool to true, which updates the way the view is rendered
+    as well as clear the value of email.emailAddress */
     const submissionSuccess = () => {
 
         setEmail({
-            ...email,
+            emailAddress: '',
             isSubmitted: true
         });
     }
