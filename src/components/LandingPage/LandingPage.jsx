@@ -88,17 +88,33 @@ export default function LandingPage() {
         <div>
             <h1>Welcome to the design store</h1>
 
-            <p>Sign up for our newsletter for updates on new products</p>
+            {/* If email.isSubmitted evaluates truthy, it means the email address was received and has
+            been posted to the database successfully so we can render a message indicating that
+            no further input is required. Otherwise a falsy value will render a form that will post
+            to the database */}
+            {email.isSubmitted ? 
 
-            <form onSubmit={(e) => validateEmail(e)}>
+                <div>
+                    <p>Thank you for joining our newsletter!</p>
+                </div>
 
-                <label htmlFor="email">
-                    <input type="text" id="email" value={email.emailAddress} onChange={e => updateEmail(e)} />
-                </label>
+            :
 
-                <input value="Opt-in to Emails" type="submit" />
+                <div>
+                    <p>Sign up for our newsletter for updates on new products</p>
 
-            </form>
+                    <form onSubmit={(e) => validateEmail(e)}>
+
+                        <label htmlFor="email">
+                            <input type="text" id="email" value={email.emailAddress} onChange={e => updateEmail(e)} />
+                        </label>
+
+                        <input value="Opt-in to Emails" type="submit" />
+
+                    </form>
+                </div>
+                
+            }
 
             <button onClick={ () => history.push('/storefront') } >Down the Rabbit Hole</button>
 
