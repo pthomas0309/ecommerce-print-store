@@ -67,7 +67,7 @@ export default function LandingPage() {
         dispatch({
             type: 'SAVE_EMAIL',
             payload: email.emailAddress,
-            submissionSuccess: submissionSuccess()
+            submissionSuccess: submissionSuccess
         })
 
     }
@@ -113,7 +113,7 @@ export default function LandingPage() {
 
                     </form>
                 </div>
-                
+
             }
 
             <button onClick={ () => history.push('/storefront') } >Down the Rabbit Hole</button>
